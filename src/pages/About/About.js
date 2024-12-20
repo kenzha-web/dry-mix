@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 
@@ -54,4 +54,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default memo(About);

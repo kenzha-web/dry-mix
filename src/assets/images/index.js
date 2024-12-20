@@ -3,7 +3,7 @@ import logoLight from "./icons/dry-mix-light.svg";
 // ============== Products Start here ====================
 
 // Main Banner
-import MainBanner from "./main-banner.png"
+import MainBanner from "./banner/main-banner.png"
 
 // Alinex
 import AlinexOne from "./products/alinex1.png";

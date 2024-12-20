@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {memo, useState} from "react";
 import CategoryEdit from "./CategoryEdit";
 import ProductEdit from "./ProductEdit";
 import NewsEdit from "./NewsEdit";
@@ -36,4 +36,4 @@ const AdminNavigation = () => {
   )
 }
 
-export default AdminNavigation;
+export default memo(AdminNavigation);

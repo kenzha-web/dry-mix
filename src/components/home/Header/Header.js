@@ -1,24 +1,36 @@
-import {useEffect, useState, useRef, Fragment} from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {useEffect, useState, useRef, Fragment, memo} from "react";
+import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { FaCaretDown } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { logo } from "../../../assets/images";
+import { logoLight } from "../../../assets/images";
 import Image from "../../designLayouts/Image";
 import { navBarList } from "../../../constants";
 import Flex from "../../designLayouts/Flex";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, RESET} from "../../../store/features/auth/authSlice";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const products = useSelector((state) => state.orebiReducer.products);
+  const user = useSelector((state) => state.auth.user);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ref = useRef();
+
+  const role = "";
+
+  const logoutUser = async () => {
+    dispatch(RESET());
+    await dispatch(logout());
+    navigate("/");
+  }
 
   useEffect(() => {
     const ResponsiveMenu = () => {
@@ -54,7 +66,7 @@ const Header = () => {
           <div className="lg:hidden">
             <HiMenuAlt2
               onClick={() => setSidenav(!sidenav)}
-              className="cursor-pointer w-10 h-8 absolute top-6 left-4 z-50"
+              className="text-white cursor-pointer w-10 h-8 absolute top-6 left-4 z-50"
             />
             {sidenav && (
               <div className="fixed top-0 left-0 w-full h-screen bg-black text-gray-200 bg-opacity-80 z-50">
@@ -66,8 +78,8 @@ const Header = () => {
                 >
                   <div className="w-full h-full bg-primeColor p-6">
                     <img
-                      className="w-28 mb-6"
-                      src={logo}
+                      className="w-36 mb-6"
+                      src={logoLight}
                       alt="logo"
                     />
                     <ul className="text-gray-200 flex flex-col gap-2">
@@ -100,8 +112,8 @@ const Header = () => {
 
           <div className="flex justify-center w-full lg:w-auto">
             <Link to="/">
-              <div className="w-32">
-                <Image className="object-cover" imgSrc={logo} />
+              <div className="w-36">
+                <Image className="object-cover" imgSrc={logoLight} />
               </div>
             </Link>
           </div>
@@ -117,10 +129,10 @@ const Header = () => {
                 <Fragment key={_id}>
                   <NavLink
                     key={_id}
-                    className={`
+                    className={({ isActive }) => `
                       flex font-normal hover:font-bold justify-center items-center px-4 text-base text-white
-                      hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626]
-                      active:text=[#262626]
+                      hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#c3cdcd]
+                      ${isActive ? 'text-[#bdb7b9] font-bold underline underline-offset-[4px] decoration-[1px]' : ''}
                       whitespace-nowrap
                     `}
                     to={link}
@@ -136,26 +148,39 @@ const Header = () => {
             </motion.ul>
           )}
 
-          {/* Иконки справа */}
           <div className="flex items-center gap-4">
             <div ref={ref} className="relative flex items-center gap-3 cursor-pointer" onClick={() => setShowUser(!showUser)}>
-              <Link to="/cart">
+              <Link to="/cart" onClick={(e) => e.stopPropagation()}>
                 <div className="relative cursor-pointer">
-                  <MdAddShoppingCart color={"white"} size={28}/>
+                  <MdAddShoppingCart
+                    color={"#ffffff"}
+                    size={28}
+                    className="hover:brightness-110 hover:scale-110 transition-all duration-300"
+                  />
                   <span className="absolute top-0 right-0 w-4 h-4 text-xs flex items-center justify-center bg-primeColor text-white rounded-full">
                     {products.length > 0 ? products.length : 0}
                   </span>
                 </div>
               </Link>
-              <FaRegUserCircle color={"white"} size={24} />
-              <FaCaretDown color={"white"} />
+              <div className="flex items-center gap-1 cursor-pointer">
+                <FaRegUserCircle
+                  color={"#ffffff"}
+                  size={24}
+                  className="hover:brightness-110 hover:scale-110 transition-all duration-300"
+                />
+                <FaCaretDown
+                  color={"#ffffff"}
+                  className="hover:brightness-110 hover:scale-110 transition-all duration-300 mt-1"
+                />
+              </div>
               {showUser && (
                 <motion.ul
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute top-8 left-0 z-50 bg-primeColor w-64 text-[#767676] h-auto p-4 pb-6"
-                >
+                  className={`absolute z-50 bg-primeColor w-64 text-[#767676] h-auto p-4 pb-6 ${
+                    window.innerWidth < 768 ? 'top-12 right-4' : 'top-8 left-[-100px]'
+                  }`}                >
                   <Link to="/signin">
                     <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                       Авторизоваться
@@ -166,12 +191,28 @@ const Header = () => {
                       Зарегистрироваться
                     </li>
                   </Link>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Корзина
-                  </li>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Оставить заявку
-                  </li>
+                  <Link to="/basket">
+                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Корзина
+                    </li>
+                  </Link>
+                  <Link to="/contact">
+                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Оставить заявку
+                    </li>
+                  </Link>
+                  {role === "admin" && (
+                    <Link to="/manage">
+                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Админ панель
+                      </li>
+                    </Link>
+                  )}
+                  {user && (
+                    <li onClick={logoutUser} className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Выйти
+                    </li>
+                  )}
                 </motion.ul>
               )}
             </div>
@@ -182,4 +223,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

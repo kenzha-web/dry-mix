@@ -2,22 +2,22 @@ import { Link } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { IoMdCall } from "react-icons/io"
 import { useSelector } from "react-redux";
+import {memo} from "react";
 
 const SpecialCase = () => {
   const products = useSelector((state) => state.orebiReducer.products);
   return (
-    <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
-      <Link to="/signin">
+    <div className="fixed top-52 right-2 z-20 flex flex-col gap-2 md:flex-col md:top-52 sm:right-2">
+      <Link to="/contact">
         <div className="bg-white w-16 h-[70px] rounded-md flex flex-col gap-1 text-[#33475b] justify-center items-center shadow-testShadow overflow-x-hidden group cursor-pointer">
           <div className="flex justify-center items-center">
             <IoMdCall className="text-2xl -translate-x-12 group-hover:translate-x-3 transition-transform duration-200" />
-
             <IoMdCall className="text-2xl -translate-x-3 group-hover:translate-x-12 transition-transform duration-200" />
           </div>
           <p className="text-xs font-semibold font-titleFont">Звонок</p>
         </div>
       </Link>
-      <Link to="/cart">
+      <Link to="/basket">
         <div className="bg-white w-16 h-[70px] rounded-md flex flex-col gap-1 text-[#33475b] justify-center items-center shadow-testShadow overflow-x-hidden group cursor-pointer relative">
           <div className="flex justify-center items-center">
             <RiShoppingCart2Fill className="text-2xl -translate-x-12 group-hover:translate-x-3 transition-transform duration-200" />
@@ -36,4 +36,4 @@ const SpecialCase = () => {
   );
 };
 
-export default SpecialCase;
+export default memo(SpecialCase);

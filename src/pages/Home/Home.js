@@ -3,6 +3,7 @@ import FeaturedBuildingMixes from "../../components/home/FeaturedBuildingMixes/F
 import FeaturedBuildingMaterials from "../../components/home/FeaturedBuildingMaterials/FeaturedBuildingMaterials";
 import AboutCompany from "../../components/home/AboutCompany/AboutCompany";
 import CompanyContacts from "../../components/home/CompanyContacts/CompanyContacts";
+import {memo} from "react";
 
 const Home = () => {
   return (
@@ -18,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

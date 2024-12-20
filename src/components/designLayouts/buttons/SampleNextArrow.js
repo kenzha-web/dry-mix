@@ -1,4 +1,5 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
+import {memo} from "react";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -14,4 +15,4 @@ const SampleNextArrow = (props) => {
   );
 };
 
-export default SampleNextArrow;
+export default memo(SampleNextArrow);

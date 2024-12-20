@@ -3,17 +3,22 @@ import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
 import Header from "./components/home/Header/Header";
 import SpecialCase from "./components/SpecialCase/SpecialCase";
-import About from "./pages/About/About";
-import SignIn from "./pages/Account/SignIn";
-import SignUp from "./pages/Account/SignUp";
-import Basket from "./pages/Basket/Basket";
-import Contact from "./pages/Contact/Contact";
+import {lazy, Suspense, useEffect} from "react";
 import Home from "./pages/Home/Home";
-import ProductDetails from "./pages/ProductDetails/ProductDetails";
-import Catalog from "./pages/Catalog/Catalog";
-import Manage from "./pages/Manage/Manage";
-import NewsPage from "./pages/News/NewsPage";
-import NewsDetails from "./pages/NewsDetails/NewsDetails";
+import {ToastContainer} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
+import {getLogInStatus} from "./store/features/auth/authSlice";
+
+const Catalog = lazy(() => import("./pages/Catalog/Catalog"));
+const About = lazy(() => import("./pages/About/About"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
+const NewsPage = lazy(() => import("./pages/News/NewsPage"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails/ProductDetails"));
+const NewsDetails = lazy(() => import("./pages/NewsDetails/NewsDetails"));
+const Basket = lazy(() => import("./pages/Basket/Basket"));
+const Manage = lazy(() => import("./pages/Manage/Manage"));
+const SignUp = lazy(() => import("./pages/Account/SignUp"));
+const SignIn = lazy(() => import("./pages/Account/SignIn"));
 
 const Layout = () => {
   return (
@@ -28,23 +33,32 @@ const Layout = () => {
 };
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLogInStatus());
+  }, [dispatch])
+
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/product/:_id" element={<ProductDetails />} />
-          <Route path="/news/:_id" element={<NewsDetails />} />
-          <Route path="/cart" element={<Basket />} />
-          <Route path="/manage" element={<Manage />} />
-        </Route>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-      </Routes>
+      <ToastContainer />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/product/:_id" element={<ProductDetails />} />
+            <Route path="/news/:_id" element={<NewsDetails />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="/manage" element={<Manage />} />
+          </Route>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </Suspense>
     </HashRouter>
   );
 }

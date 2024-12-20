@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {memo, useState} from "react";
 import {Link} from "react-router-dom";
 
 const CategoryEdit = () => {
@@ -80,4 +80,4 @@ const CategoryEdit = () => {
   );
 }
 
-export default CategoryEdit;
+export default memo(CategoryEdit);

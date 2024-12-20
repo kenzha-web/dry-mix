@@ -5,6 +5,7 @@ import {
   drecreaseQuantity,
   increaseQuantity,
 } from "../../store/orebiSlice";
+import {memo} from "react";
 
 const ItemBasket = ({ item }) => {
   const dispatch = useDispatch();
@@ -45,4 +46,4 @@ const ItemBasket = ({ item }) => {
   );
 };
 
-export default ItemBasket;
+export default memo(ItemBasket);

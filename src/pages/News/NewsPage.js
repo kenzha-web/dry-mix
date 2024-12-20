@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import ProductBanner from "../../components/pageProps/shopPage/ProductBanner";
@@ -28,4 +28,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default memo(NewsPage);

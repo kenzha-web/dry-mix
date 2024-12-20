@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {memo, useState} from "react";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
@@ -12,9 +12,9 @@ import SampleNextArrow from "./../../designLayouts/buttons/SampleNextArrow";
 import SamplePrevArrow from "./../../designLayouts/buttons/SamplePrevArrow";
 
 const FeaturedBuildingMixes = () => {
-  const [activeTab, setActiveTab] = useState(""); // Управление активной вкладкой
+  const [activeTab, setActiveTab] = useState("");
 
-  const tabs = ["Новинка", "Акция", "Рекомендуем", "Хит"]; // Вкладки
+  const tabs = ["Новинка", "Акция", "Рекомендуем", "Хит"];
 
   const settings = {
     infinite: true,
@@ -141,4 +141,4 @@ const FeaturedBuildingMixes = () => {
   );
 };
 
-export default FeaturedBuildingMixes;
+export default memo(FeaturedBuildingMixes);

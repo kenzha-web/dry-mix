@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -99,4 +99,4 @@ const Basket = () => {
   );
 };
 
-export default Basket;
+export default memo(Basket);

@@ -5,6 +5,7 @@ import Badge from "./Badge";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../store/orebiSlice";
+import {memo} from "react";
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -73,11 +74,11 @@ const Product = (props) => {
             <h2 className="text-sm md:text-[16px] text-primeColor font-bold text-center">
               {props.productName}
             </h2>
-            <p className="text-xs md:text-[14px] text-gray-500 text-center">
+            <p className="text-xs md:text-[14px] text-gray-500 text-center mt-3">
               {props.color}
             </p>
           </div>
-          <div className="flex justify-center mt-2">
+          <div className="flex justify-center mt-3">
             <p className="text-sm md:text-[14px] text-gray-500">{props.price} тг</p>
           </div>
         </div>
@@ -86,5 +87,5 @@ const Product = (props) => {
   );
 };
 
-export default Product;
+export default memo(Product);
 

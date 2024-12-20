@@ -1,5 +1,7 @@
+import {memo} from "react";
+
 const Flex = ({ children, className }) => {
   return <div className={className}>{children}</div>;
 };
 
-export default Flex;
+export default memo(Flex);

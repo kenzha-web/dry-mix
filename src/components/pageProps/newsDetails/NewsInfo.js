@@ -1,3 +1,5 @@
+import {memo} from "react";
+
 const NewsInfo = ({ newsInfo }) => {
   return (
     <div className="flex flex-col gap-5">
@@ -10,4 +12,4 @@ const NewsInfo = ({ newsInfo }) => {
   );
 };
 
-export default NewsInfo;
+export default memo(NewsInfo);

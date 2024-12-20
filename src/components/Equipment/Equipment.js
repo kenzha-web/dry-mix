@@ -1,5 +1,6 @@
 import Image from "..//designLayouts/Image";
 import Badge from "../home/Products/Badge";
+import {memo} from "react";
 
 const Equipment = (props) => {
     return (
@@ -16,5 +17,5 @@ const Equipment = (props) => {
     );
 };
 
-export default Equipment;
+export default memo(Equipment);
 

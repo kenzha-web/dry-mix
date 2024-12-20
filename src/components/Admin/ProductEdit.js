@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {memo, useState} from "react";
 import {AiOutlineCloudUpload} from "react-icons/ai";
 
 const ProductEdit = () => {
@@ -185,5 +185,5 @@ const ProductEdit = () => {
   );
 };
 
-export default ProductEdit;
+export default memo(ProductEdit);
 

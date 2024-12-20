@@ -1,4 +1,5 @@
 import { AiOutlineCopyright } from "react-icons/ai";
+import {memo} from "react";
 
 const FooterBottom = () => {
   return (
@@ -15,4 +16,4 @@ const FooterBottom = () => {
   );
 };
 
-export default FooterBottom;
+export default memo(FooterBottom);

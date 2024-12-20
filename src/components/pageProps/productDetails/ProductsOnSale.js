@@ -1,4 +1,5 @@
 import { SplOfferData } from "../../../constants";
+import {memo} from "react";
 
 const ProductsOnSale = () => {
   return (
@@ -26,4 +27,4 @@ const ProductsOnSale = () => {
   );
 };
 
-export default ProductsOnSale;
+export default memo(ProductsOnSale);

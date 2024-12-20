@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 
@@ -28,4 +28,4 @@ const Breadcrumbs = ({ prevLocation, title }) => {
   );
 };
 
-export default Breadcrumbs;
+export default memo(Breadcrumbs);

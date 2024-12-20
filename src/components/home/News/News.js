@@ -1,8 +1,8 @@
-import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../../designLayouts/Image";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import {memo} from "react";
 
 const News = (props) => {
   const dispatch = useDispatch();
@@ -58,5 +58,5 @@ const News = (props) => {
   );
 };
 
-export default News;
+export default memo(News);
 

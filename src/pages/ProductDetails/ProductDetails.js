@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import ProductInfo from "../../components/pageProps/productDetails/ProductInfo";
@@ -40,4 +40,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default memo(ProductDetails);

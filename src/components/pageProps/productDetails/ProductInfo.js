@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../store/orebiSlice";
+import {memo} from "react";
 
 const ProductInfo = ({ productInfo }) => {
   const dispatch = useDispatch();
@@ -33,4 +34,4 @@ const ProductInfo = ({ productInfo }) => {
   );
 };
 
-export default ProductInfo;
+export default memo(ProductInfo);

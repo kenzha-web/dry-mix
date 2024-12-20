@@ -1,4 +1,5 @@
 import Heading from "../Products/Heading";
+import {memo} from "react";
 
 const CompanyContacts = () => {
   return (
@@ -36,4 +37,4 @@ const CompanyContacts = () => {
   );
 };
 
-export default CompanyContacts;
+export default memo(CompanyContacts);

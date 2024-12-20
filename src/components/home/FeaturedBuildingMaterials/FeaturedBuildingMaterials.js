@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {memo, useState} from "react";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
@@ -137,4 +137,4 @@ const FeaturedBuildingMaterials = () => {
     );
 };
 
-export default FeaturedBuildingMaterials;
+export default memo(FeaturedBuildingMaterials);

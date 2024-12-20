@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import {memo, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import AdminNavigation from "../../components/Admin/AdminNavigation";
+import {UseRedirectLoggedOutUser} from "../../hooks/useRedirectLoggedOutUser";
 
 const Manage = () => {
+  UseRedirectLoggedOutUser("/");
+  const role = "admin";
   const location = useLocation();
   const [prevLocation, setPrevLocation] = useState("");
 
@@ -25,4 +28,4 @@ const Manage = () => {
   );
 };
 
-export default Manage;
+export default memo(Manage);

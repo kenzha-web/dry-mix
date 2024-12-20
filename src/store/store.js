@@ -11,6 +11,10 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import orebiReducer from "./orebiSlice";
+import categoriesSlice from "./features/categories/categoriesSlice";
+import productsSlice from "./features/products/productsSlice";
+import {apiSlice} from "./features/api/apiSlice";
+import authSlice from "./features/auth/authSlice";
 
 const persistConfig = {
   key: "root",
@@ -21,13 +25,19 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, orebiReducer);
 
 export const store = configureStore({
-  reducer: { orebiReducer: persistedReducer },
+  reducer: {
+    orebiReducer: persistedReducer,
+    auth: authSlice,
+    categories: categoriesSlice,
+    products: productsSlice,
+    [apiSlice.reducerPath]: apiSlice.reducer
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware),
 });
 
 export let persistor = persistStore(store);

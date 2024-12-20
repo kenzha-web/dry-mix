@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {memo, useState} from "react";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import Pagination from "../../components/pageProps/shopPage/Pagination";
 import ProductBanner from "../../components/pageProps/shopPage/ProductBanner";
@@ -26,4 +26,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default memo(Catalog);
