@@ -1,7 +1,7 @@
 {
   "name": "dry-mix-project",
   "version": "1.0.0",
-  "homepage": "https://kenzha-web.github.io/dry-mix-project",
+  "homepage": "https://kenzha-web.github.io/dry-mix",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
