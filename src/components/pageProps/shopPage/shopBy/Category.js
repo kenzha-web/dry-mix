@@ -21,7 +21,7 @@ const Category = ({ onSelectCategory }) => {
             <li
               key={id}
               className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center justify-between cursor-pointer"
-              onClick={() => onSelectCategory(id)} // Выбор категории
+              onClick={() => onSelectCategory(id)}
             >
               {name}
               <span className="text-[10px] lg:text-xs text-gray-400 hover:text-primeColor duration-300">
