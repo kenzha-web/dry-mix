@@ -4,11 +4,10 @@ import {memo} from "react";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-screen text-white rounded-lg overflow-hidden bg-cover bg-center mt-5 mb-5">
-      {/* Фоновое изображение */}
+    <div className="relative w-full h-[50vh] sm:h-screen text-white rounded-lg overflow-hidden bg-cover bg-center mt-5 mb-5">
       <div
         className="absolute inset-0 bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: `url(${MainBanner})` }}
+        style={{ backgroundImage: `url(${MainBanner}?v=${Date.now()})` }}
       ></div>
 
       <div className="absolute inset-0 bg-green-950 bg-opacity-55"></div>
