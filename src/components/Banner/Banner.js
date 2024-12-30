@@ -4,13 +4,13 @@ import {memo} from "react";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-[50vh] sm:h-screen text-white rounded-lg overflow-hidden bg-cover bg-center mt-5 mb-5">
+    <div className="relative w-full h-screen text-white rounded-lg overflow-hidden bg-cover bg-center mt-5 mb-5">
       <div
-        className="absolute inset-0 bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: `url(${MainBanner}?v=${Date.now()})` }}
+        className="absolute inset-0 bg-fixed bg-cover bg-center z--1"
+        style={{ backgroundImage: `url("${MainBanner}?v=${Date.now()}")` }}
       ></div>
 
-      <div className="absolute inset-0 bg-green-950 bg-opacity-55"></div>
+      <div className="absolute inset-0 bg-green-950 bg-opacity-55 z-1"></div>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 max-w-screen-lg mx-auto text-center">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 drop-shadow-lg bg-opacity-55">

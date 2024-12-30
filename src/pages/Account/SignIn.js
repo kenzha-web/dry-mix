@@ -147,17 +147,6 @@ const SignIn = () => {
                   </span>
                 </Link>
               </p>
-              <div className="flex items-center mt-2 mb-2">
-                <hr className="flex-grow border-t border-gray-300" />
-                <span className="mx-4 text-sm text-center font-titleFont font-medium">
-                    ИЛИ
-                  </span>
-                <hr className="flex-grow border-t border-gray-300" />
-              </div>
-              <button className="flex items-center justify-center gap-2 bg-red-500 text-white p-3 px-5 rounded-md">
-                <FaGoogle />
-                <p className="text-sm">Продолжить с Google</p>
-              </button>
             </div>
           </div>
         </form>

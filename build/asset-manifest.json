@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/dry-mix/static/css/main.a2a06d5f.css",
-    "main.js": "/dry-mix/static/js/main.45701ec4.js",
+    "main.css": "/dry-mix/static/css/main.ee904225.css",
+    "main.js": "/dry-mix/static/js/main.65917637.js",
     "static/js/722.0794a034.chunk.js": "/dry-mix/static/js/722.0794a034.chunk.js",
     "static/js/616.4618f290.chunk.js": "/dry-mix/static/js/616.4618f290.chunk.js",
     "static/js/400.b7ccf13f.chunk.js": "/dry-mix/static/js/400.b7ccf13f.chunk.js",
@@ -10,8 +10,8 @@
     "static/js/864.762c8dde.chunk.js": "/dry-mix/static/js/864.762c8dde.chunk.js",
     "static/js/241.1adc89f6.chunk.js": "/dry-mix/static/js/241.1adc89f6.chunk.js",
     "static/js/221.a7aafe4c.chunk.js": "/dry-mix/static/js/221.a7aafe4c.chunk.js",
-    "static/js/730.f875fb29.chunk.js": "/dry-mix/static/js/730.f875fb29.chunk.js",
-    "static/js/913.630563b3.chunk.js": "/dry-mix/static/js/913.630563b3.chunk.js",
+    "static/js/730.36195179.chunk.js": "/dry-mix/static/js/730.36195179.chunk.js",
+    "static/js/913.5ee29c65.chunk.js": "/dry-mix/static/js/913.5ee29c65.chunk.js",
     "reactPlayerYouTube.js": "/dry-mix/static/js/reactPlayerYouTube.b4bb5585.chunk.js",
     "reactPlayerSoundCloud.js": "/dry-mix/static/js/reactPlayerSoundCloud.95c5dd6b.chunk.js",
     "reactPlayerVimeo.js": "/dry-mix/static/js/reactPlayerVimeo.dddc68f4.chunk.js",
@@ -49,8 +49,8 @@
     "static/media/dry-mix-light.svg": "/dry-mix/static/media/dry-mix-light.03b199c7e0e02ef62f6d5d08e5efe556.svg",
     "static/media/dry-mix.svg": "/dry-mix/static/media/dry-mix.f5140e13cce4044652425575478f9a0a.svg",
     "index.html": "/dry-mix/index.html",
-    "main.a2a06d5f.css.map": "/dry-mix/static/css/main.a2a06d5f.css.map",
-    "main.45701ec4.js.map": "/dry-mix/static/js/main.45701ec4.js.map",
+    "main.ee904225.css.map": "/dry-mix/static/css/main.ee904225.css.map",
+    "main.65917637.js.map": "/dry-mix/static/js/main.65917637.js.map",
     "722.0794a034.chunk.js.map": "/dry-mix/static/js/722.0794a034.chunk.js.map",
     "616.4618f290.chunk.js.map": "/dry-mix/static/js/616.4618f290.chunk.js.map",
     "400.b7ccf13f.chunk.js.map": "/dry-mix/static/js/400.b7ccf13f.chunk.js.map",
@@ -59,8 +59,8 @@
     "864.762c8dde.chunk.js.map": "/dry-mix/static/js/864.762c8dde.chunk.js.map",
     "241.1adc89f6.chunk.js.map": "/dry-mix/static/js/241.1adc89f6.chunk.js.map",
     "221.a7aafe4c.chunk.js.map": "/dry-mix/static/js/221.a7aafe4c.chunk.js.map",
-    "730.f875fb29.chunk.js.map": "/dry-mix/static/js/730.f875fb29.chunk.js.map",
-    "913.630563b3.chunk.js.map": "/dry-mix/static/js/913.630563b3.chunk.js.map",
+    "730.36195179.chunk.js.map": "/dry-mix/static/js/730.36195179.chunk.js.map",
+    "913.5ee29c65.chunk.js.map": "/dry-mix/static/js/913.5ee29c65.chunk.js.map",
     "reactPlayerYouTube.b4bb5585.chunk.js.map": "/dry-mix/static/js/reactPlayerYouTube.b4bb5585.chunk.js.map",
     "reactPlayerSoundCloud.95c5dd6b.chunk.js.map": "/dry-mix/static/js/reactPlayerSoundCloud.95c5dd6b.chunk.js.map",
     "reactPlayerVimeo.dddc68f4.chunk.js.map": "/dry-mix/static/js/reactPlayerVimeo.dddc68f4.chunk.js.map",
@@ -81,7 +81,7 @@
     "804.b12d8ace.chunk.js.map": "/dry-mix/static/js/804.b12d8ace.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2a06d5f.css",
-    "static/js/main.45701ec4.js"
+    "static/css/main.ee904225.css",
+    "static/js/main.65917637.js"
   ]
 }
