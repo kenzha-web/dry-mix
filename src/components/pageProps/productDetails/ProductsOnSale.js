@@ -1,5 +1,6 @@
 import { SplOfferData } from "../../../constants";
 import {memo} from "react";
+import {formatPrice} from "../../../utils/price-format";
 
 const ProductsOnSale = () => {
   return (
@@ -18,7 +19,7 @@ const ProductsOnSale = () => {
             </div>
             <div className="flex flex-col gap-2 font-titleFont">
               <p className="text-base font-medium">{item.productName}</p>
-              <p className="text-sm font-semibold">${item.price}</p>
+              <p className="text-sm font-semibold">{formatPrice(item.price)}</p>
             </div>
           </div>
         ))}

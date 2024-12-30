@@ -1,9 +1,9 @@
 import Category from "./shopBy/Category";
 
-const ShopSideNav = () => {
+const ShopSideNav = ({ onSelectCategory }) => {
   return (
     <div className="w-full flex flex-col gap-6">
-      <Category icons={false} />
+      <Category icons={false} onSelectCategory={onSelectCategory} />
     </div>
   );
 };

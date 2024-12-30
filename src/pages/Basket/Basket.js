@@ -6,6 +6,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { resetCart } from "../../store/orebiSlice";
 import { emptyCart } from "../../assets/images/index";
 import ItemBasket from "./ItemBasket";
+import {formatPrice} from "../../utils/price-format";
 
 const Basket = () => {
   const dispatch = useDispatch();
@@ -52,12 +53,12 @@ const Basket = () => {
                 <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 text-lg px-4 font-medium">
                   Итого
                   <span className="font-bold tracking-wide text-lg font-titleFont">
-                    {totalAmt} тг
+                    {formatPrice(totalAmt)}
                   </span>
                 </p>
               </div>
               <div className="flex justify-end">
-                <Link to="/paymentgateway">
+                <Link to="/catalog">
                   <button className="w-52 h-10 bg-greenPrimeColor text-white hover:bg-black duration-300">
                     Перейти в каталог
                   </button>

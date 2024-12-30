@@ -4,7 +4,7 @@ import ProductEdit from "./ProductEdit";
 import NewsEdit from "./NewsEdit";
 
 const AdminNavigation = () => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("Категория");
 
   const tabs = ["Категория", "Продукт", "Новости"];
 

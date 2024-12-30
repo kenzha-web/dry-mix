@@ -9,7 +9,7 @@ const FooterBottom = () => {
           <span className="text-md mr-[1px] mt-[2px] md:mt-0 text-center hidden md:inline-flex">
             <AiOutlineCopyright />
           </span>
-          СтройСмеси демо 2024 | Производство сухих строительных смесей
+          СтройСмеси 2025 | Производство сухих строительных смесей
         </p>
       </div>
     </div>

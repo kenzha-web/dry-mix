@@ -1,5 +1,5 @@
-import {useEffect, useState, useRef, Fragment, memo} from "react";
-import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
+import { useEffect, useState, useRef, Fragment, memo } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { FaCaretDown } from "react-icons/fa";
@@ -10,31 +10,35 @@ import { logoLight } from "../../../assets/images";
 import Image from "../../designLayouts/Image";
 import { navBarList } from "../../../constants";
 import Flex from "../../designLayouts/Flex";
-import {useDispatch, useSelector} from "react-redux";
-import {logout, RESET} from "../../../store/features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, RESET } from "../../../store/features/auth/authSlice";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const [showUser, setShowUser] = useState(false);
-  const products = useSelector((state) => state.orebiReducer.products);
-  const user = useSelector((state) => state.auth.user);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const ref = useRef();
 
-  const role = "";
+  const products = useSelector((state) => state.orebiReducer.products);
+  const user = useSelector((state) => state.auth.user);
 
+  // Обновлённая функция выхода
   const logoutUser = async () => {
-    dispatch(RESET());
-    await dispatch(logout());
-    navigate("/");
-  }
+    try {
+      await dispatch(logout()).unwrap();
+      navigate("/signin");
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
+  };
 
   useEffect(() => {
     const ResponsiveMenu = () => {
-      if (window.innerWidth < 961) { // Для мобильных и планшетов
+      if (window.innerWidth < 961) {
         setShowMenu(false);
       } else {
         setShowMenu(true);
@@ -42,7 +46,6 @@ const Header = () => {
     };
     ResponsiveMenu();
     window.addEventListener("resize", ResponsiveMenu);
-
     return () => {
       window.removeEventListener("resize", ResponsiveMenu);
     };
@@ -62,7 +65,7 @@ const Header = () => {
     <div className="w-full h-20 bg-headerColor sticky top-0 z-50 border-b-[1px] border-b-gray-200">
       <nav className="h-full px-4 max-w-container mx-auto relative">
         <Flex className="flex items-center justify-between h-full">
-          {/* Бургер-меню слева на экранах меньше 1024px */}
+          {/* Кнопка гамбургера (для мобильных) */}
           <div className="lg:hidden">
             <HiMenuAlt2
               onClick={() => setSidenav(!sidenav)}
@@ -77,16 +80,12 @@ const Header = () => {
                   className="w-[80%] h-full relative"
                 >
                   <div className="w-full h-full bg-primeColor p-6">
-                    <img
-                      className="w-36 mb-6"
-                      src={logoLight}
-                      alt="logo"
-                    />
+                    <img className="w-36 mb-6" src={logoLight} alt="logo" />
                     <ul className="text-gray-200 flex flex-col gap-2">
                       {navBarList.map((item) => (
                         <li
-                          className="font-normal hover:font-bold items-center text-lg text-gray-200 hover:underline underline-offset-[4px] decoration-[1px] hover:text-white md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                           key={item._id}
+                          className="font-normal hover:font-bold items-center text-lg text-gray-200 hover:underline underline-offset-[4px] decoration-[1px] hover:text-white md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                         >
                           <NavLink
                             to={item.link}
@@ -110,6 +109,7 @@ const Header = () => {
             )}
           </div>
 
+          {/* Логотип */}
           <div className="flex justify-center w-full lg:w-auto">
             <Link to="/">
               <div className="w-36">
@@ -118,6 +118,7 @@ const Header = () => {
             </Link>
           </div>
 
+          {/* Меню (для десктопа) */}
           {showMenu && (
             <motion.ul
               initial={{ y: 30, opacity: 0 }}
@@ -132,7 +133,11 @@ const Header = () => {
                     className={({ isActive }) => `
                       flex font-normal hover:font-bold justify-center items-center px-4 text-base text-white
                       hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#c3cdcd]
-                      ${isActive ? 'text-[#bdb7b9] font-bold underline underline-offset-[4px] decoration-[1px]' : ''}
+                      ${
+                      isActive
+                        ? "text-[#bdb7b9] font-bold underline underline-offset-[4px] decoration-[1px]"
+                        : ""
+                    }
                       whitespace-nowrap
                     `}
                     to={link}
@@ -140,17 +145,21 @@ const Header = () => {
                   >
                     <li>{title}</li>
                   </NavLink>
-                  {index !== navBarList.length - 1 && (
-                    <span className="text-white">|</span>
-                  )}
+                  {index !== navBarList.length - 1 && <span className="text-white">|</span>}
                 </Fragment>
               ))}
             </motion.ul>
           )}
 
+          {/* Блок иконок (корзина, юзер) */}
           <div className="flex items-center gap-4">
-            <div ref={ref} className="relative flex items-center gap-3 cursor-pointer" onClick={() => setShowUser(!showUser)}>
-              <Link to="/cart" onClick={(e) => e.stopPropagation()}>
+            <div
+              ref={ref}
+              className="relative flex items-center gap-3 cursor-pointer"
+              onClick={() => setShowUser(!showUser)}
+            >
+              {/* Корзина */}
+              <Link to="/basket" onClick={(e) => e.stopPropagation()}>
                 <div className="relative cursor-pointer">
                   <MdAddShoppingCart
                     color={"#ffffff"}
@@ -162,6 +171,8 @@ const Header = () => {
                   </span>
                 </div>
               </Link>
+
+              {/* Иконка пользователя */}
               <div className="flex items-center gap-1 cursor-pointer">
                 <FaRegUserCircle
                   color={"#ffffff"}
@@ -173,45 +184,56 @@ const Header = () => {
                   className="hover:brightness-110 hover:scale-110 transition-all duration-300 mt-1"
                 />
               </div>
+
+              {/* Выпадающее меню пользователя */}
               {showUser && (
                 <motion.ul
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
                   className={`absolute z-50 bg-primeColor w-64 text-[#767676] h-auto p-4 pb-6 ${
-                    window.innerWidth < 768 ? 'top-12 right-4' : 'top-8 left-[-100px]'
-                  }`}                >
-                  <Link to="/signin">
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Авторизоваться
-                    </li>
-                  </Link>
-                  <Link to="/signup">
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Зарегистрироваться
-                    </li>
-                  </Link>
-                  <Link to="/basket">
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Корзина
-                    </li>
-                  </Link>
-                  <Link to="/contact">
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Оставить заявку
-                    </li>
-                  </Link>
-                  {role === "admin" && (
-                    <Link to="/manage">
-                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Админ панель
+                    window.innerWidth < 768 ? "top-12 right-4" : "top-8 left-[-100px]"
+                  }`}
+                >
+                  {!user ? (
+                    <>
+                      <Link to="/signin">
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Авторизоваться
+                        </li>
+                      </Link>
+                      <Link to="/signup">
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Зарегистрироваться
+                        </li>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/basket">
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Корзина
+                        </li>
+                      </Link>
+                      <Link to="/contact">
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Оставить заявку
+                        </li>
+                      </Link>
+                      {user?.role === "admin" && (
+                        <Link to="/manage">
+                          <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                            Админ панель
+                          </li>
+                        </Link>
+                      )}
+                      <li
+                        onClick={logoutUser}
+                        className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer"
+                      >
+                        Выйти
                       </li>
-                    </Link>
-                  )}
-                  {user && (
-                    <li onClick={logoutUser} className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Выйти
-                    </li>
+                    </>
                   )}
                 </motion.ul>
               )}

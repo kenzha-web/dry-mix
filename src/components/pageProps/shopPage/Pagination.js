@@ -1,41 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Product from "../../home/Products/Product";
-import { paginationItems } from "../../../constants";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../../../store/features/products/productsSlice";
 
-const items = paginationItems;
 function Items({ currentItems }) {
   return (
     <>
       {currentItems &&
-        currentItems.map((item) => (
-          <div key={item._id} className="w-full">
-            <Product
-              _id={item._id}
-              img={item.img}
-              productName={item.productName}
-              price={item.price}
-              color={item.color}
-              badge={item.badge}
-              des={item.des}
-            />
-          </div>
-        ))}
+        currentItems
+          .filter((item) => item && item.id)
+          .map((item) => (
+            <div key={item.id} className="w-full">
+              <Product
+                id={item.id}
+                name={item.name}
+                imageUrl={item.imageUrl}
+                description={item.description}
+                status={item.status}
+                specifications={item.specifications}
+                category={item.category?.name || "Неизвестная категория"}
+                createdAt={item.createdAt}
+                inStock={item.inStock}
+                price={item.price}
+              />
+            </div>
+          ))}
     </>
   );
 }
 
-const Pagination = ({ itemsPerPage }) => {
-  const [itemOffset, setItemOffset] = useState(0);
-  const [itemStart, setItemStart] = useState(1);
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+const Pagination = ({ itemsPerPage, selectedCategory }) => {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.products.list) || [];
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(getProducts({ page: currentPage, limit: itemsPerPage }));
+  }, [dispatch, currentPage, itemsPerPage]);
+
+  // Фильтрация продуктов по выбранной категории
+  const filteredItems = selectedCategory
+    ? items.filter((item) => item.category?.id === selectedCategory)
+    : items;
+
+  const currentItems = filteredItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    setItemOffset(newOffset);
-    setItemStart(newOffset);
+    setCurrentPage(event.selected + 1);
   };
 
   return (
@@ -56,10 +72,9 @@ const Pagination = ({ itemsPerPage }) => {
           containerClassName="flex text-base font-semibold font-titleFont py-10"
           activeClassName="bg-greenPrimeColor text-white"
         />
-
         <p className="text-base font-normal text-greenPrimeColor">
-          Товары от {itemStart === 0 ? 1 : itemStart} до {endOffset} из{" "}
-          {items.length}
+          Товары от {(currentPage - 1) * itemsPerPage + 1} до{" "}
+          {Math.min(currentPage * itemsPerPage, filteredItems.length)} из {filteredItems.length}
         </p>
       </div>
     </div>

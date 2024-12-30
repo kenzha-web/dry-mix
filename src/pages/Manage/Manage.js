@@ -5,7 +5,7 @@ import AdminNavigation from "../../components/Admin/AdminNavigation";
 import {UseRedirectLoggedOutUser} from "../../hooks/useRedirectLoggedOutUser";
 
 const Manage = () => {
-  UseRedirectLoggedOutUser("/");
+  // UseRedirectLoggedOutUser("/");
   const role = "admin";
   const location = useLocation();
   const [prevLocation, setPrevLocation] = useState("");

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import ProductInfo from "../../components/pageProps/productDetails/ProductInfo";
 import ProductsOnSale from "../../components/pageProps/productDetails/ProductsOnSale";
+import ProductFeature from "../../components/pageProps/productDetails/ProductFeature";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -10,9 +11,23 @@ const ProductDetails = () => {
   const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
-    setProductInfo(location.state.item);
+    if (location.state?.item) {
+      setProductInfo(location.state.item);
+    }
     setPrevLocation(location.pathname);
-  }, [location, productInfo]);
+  }, [location]);
+
+  if (!productInfo) {
+    return (
+      <div className="w-full mx-auto border-b-[1px] border-b-gray-300">
+        <div className="max-w-container mx-auto px-4 py-10">
+          <p>Товар не найден!</p>
+        </div>
+      </div>
+    );
+  }
+
+  const imageUrl = productInfo.imageUrl ? `https://${productInfo.imageUrl}` : `http://${productInfo.imageUrl}`;
 
   return (
     <div className="w-full mx-auto border-b-[1px] border-b-gray-300">
@@ -26,15 +41,16 @@ const ProductDetails = () => {
           </div>
           <div className="h-full xl:col-span-2">
             <img
-              className="w-full h-full object-cover"
-              src={productInfo.img}
-              alt={productInfo.img}
+              className="w-full xl:mt-16 object-cover"
+              src={imageUrl}
+              alt="Изображение"
             />
           </div>
           <div className="h-full w-full md:col-span-2 xl:col-span-3 xl:p-14 flex flex-col gap-6 justify-center">
             <ProductInfo productInfo={productInfo} />
           </div>
         </div>
+        {/*<ProductFeature productInfo={productInfo} />*/}
       </div>
     </div>
   );

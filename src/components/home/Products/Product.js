@@ -5,33 +5,37 @@ import Badge from "./Badge";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../store/orebiSlice";
-import {memo} from "react";
+import {memo, useCallback} from "react";
+import {formatPrice} from "../../../utils/price-format";
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  const _id = props._id;
-  const idString = (_id) => {
-    return String(_id).toLowerCase().split(" ").join("");
-  };
-  const rootId = idString(_id);
-
   const navigate = useNavigate();
+  const imageUrl = props.imageUrl ? `https://${props.imageUrl}` : `http://${props.imageUrl}`;
+
+  const id = props.id;
+  const idString = (id) => {
+    return String(id).toLowerCase().split(" ").join("");
+  };
+  const rootId = idString(id);
   const productItem = props;
-  const handleProductDetails = () => {
+
+  const handleProductDetails = useCallback(() => {
     navigate(`/product/${rootId}`, {
       state: {
         item: productItem,
       },
     });
-  };
+  }, [navigate, rootId, productItem]);
+
   return (
     <div className="w-full relative group">
       <div className="relative overflow-hidden">
         <div>
-          <Image className="w-full h-full max-h-64 md:max-h-80 object-contain" imgSrc={props.img} />
+          <Image className="w-full h-full max-h-64 md:max-h-80 object-contain" imgSrc={imageUrl} />
         </div>
         <div className="absolute top-4 left-4 md:top-6 md:left-6">
-          {props.badge && <Badge text="Новинки" />}
+          {props.status && <Badge text={props.status} />}
         </div>
         <div className="w-full h-20 md:h-24 absolute bg-white -bottom-[100px] group-hover:bottom-0 duration-500">
           <ul className="w-full h-full flex flex-col items-end justify-center gap-2 md:gap-4 font-titleFont px-2 md:px-4 border-l border-r">
@@ -39,13 +43,13 @@ const Product = (props) => {
               onClick={() =>
                 dispatch(
                   addToCart({
-                    _id: props._id,
-                    name: props.productName,
+                    _id: props.id,
+                    name: props.name,
                     quantity: 1,
-                    image: props.img,
-                    badge: props.badge,
+                    image: props.imageUrl,
+                    status: props.status,
                     price: props.price,
-                    colors: props.color,
+                    category: props.category,
                   })
                 )
               }
@@ -72,14 +76,14 @@ const Product = (props) => {
         <div className="flex flex-col justify-center items-center h-full">
           <div className="flex flex-col items-center">
             <h2 className="text-sm md:text-[16px] text-primeColor font-bold text-center">
-              {props.productName}
+              {props.name}
             </h2>
             <p className="text-xs md:text-[14px] text-gray-500 text-center mt-3">
-              {props.color}
+              {props.category}
             </p>
           </div>
           <div className="flex justify-center mt-3">
-            <p className="text-sm md:text-[14px] text-gray-500">{props.price} тг</p>
+            <p className="text-sm md:text-[14px] text-gray-500">{formatPrice(props.price)}</p>
           </div>
         </div>
       </div>

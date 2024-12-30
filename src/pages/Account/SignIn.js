@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 const initialState = {
   email: "",
   password: "",
+  token: "",
 };
 
 const SignIn = () => {
@@ -17,7 +18,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
-  const { isLoggedIn, isError } = useSelector(state => state.auth);
+  const { user, isLoading, isSuccess } = useSelector((state) => state.auth);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,10 +36,10 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if(isLoggedIn) {
-      navigate("/home");
+    if (isSuccess && user) {
+      navigate("/");
     }
-  }, [isLoggedIn, isError, navigate]);
+  }, [isSuccess, user, navigate]);
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
@@ -94,7 +95,7 @@ const SignIn = () => {
         </div>
       </div>
       <div className="w-full lgl:w-1/2 h-full">
-        <form onSubmit={handleLogin} className="w-full lgl:w-[450px] h-screen flex items-center justify-center">
+        <form className="w-full lgl:w-[450px] h-screen flex items-center justify-center">
           <div className="px-6 py-4 w-full h-[90%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
             <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
               С возвращением
@@ -131,7 +132,9 @@ const SignIn = () => {
               </div>
 
               <button
+                type="submit"
                 onClick={handleLogin}
+                disabled={isLoading}
                 className="bg-greenPrimeColor hover:bg-black text-gray-200 hover:text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
               >
                 Войти

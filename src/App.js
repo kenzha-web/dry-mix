@@ -7,7 +7,11 @@ import {lazy, Suspense, useEffect} from "react";
 import Home from "./pages/Home/Home";
 import {ToastContainer} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import {getLogInStatus} from "./store/features/auth/authSlice";
+import axios from "axios";
+import {checkAuth} from "./store/features/auth/authSlice";
+import AdminRoute from "./hooks/adminRoute";
+
+axios.defaults.withCredentials = true;
 
 const Catalog = lazy(() => import("./pages/Catalog/Catalog"));
 const About = lazy(() => import("./pages/About/About"));
@@ -34,10 +38,11 @@ const Layout = () => {
 
 function App() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getLogInStatus());
-  }, [dispatch])
+    dispatch(checkAuth());
+  }, [dispatch]);
 
   return (
     <HashRouter>
@@ -53,7 +58,9 @@ function App() {
             <Route path="/product/:_id" element={<ProductDetails />} />
             <Route path="/news/:_id" element={<NewsDetails />} />
             <Route path="/basket" element={<Basket />} />
-            <Route path="/manage" element={<Manage />} />
+            <Route element={<AdminRoute />}>
+              <Route path="/manage" element={<Manage />} />
+            </Route>
           </Route>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />

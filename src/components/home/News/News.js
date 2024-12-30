@@ -1,18 +1,19 @@
 import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../../designLayouts/Image";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import {memo} from "react";
+import {formatDate} from "../../../utils/date-format";
 
 const News = (props) => {
-  const dispatch = useDispatch();
-  const _id = props._id;
-  const idString = (_id) => {
-    return String(_id).toLowerCase().split(" ").join("");
-  };
-  const rootId = idString(_id);
-
   const navigate = useNavigate();
+  const id = props.id;
+  const previewImage = props.previewImage ? `https://${props.previewImage}` : `http://${props.previewImage}`;
+
+  const idString = (id) => {
+    return String(id).toLowerCase().split(" ").join("");
+  };
+  const rootId = idString(id);
+
   const title = props;
   const handleProductDetails = () => {
     navigate(`/news/${rootId}`, {
@@ -26,7 +27,7 @@ const News = (props) => {
     <div className="w-full relative group">
       <div className="relative overflow-hidden">
         <div>
-          <Image className="w-full h-full max-h-64 md:max-h-80 object-contain" imgSrc={props.img} />
+          <Image className="w-full h-full max-h-64 md:max-h-80 object-contain" imgSrc={previewImage} />
         </div>
         <div className="w-full h-20 md:h-24 absolute bg-white -bottom-[100px] group-hover:bottom-0 duration-500">
           <ul className="w-full h-full flex flex-col items-end justify-center gap-2 md:gap-4 font-titleFont px-2 md:px-4 border-l border-r">
@@ -50,7 +51,7 @@ const News = (props) => {
             </h2>
           </div>
           <div className="flex justify-center mt-2">
-            <p className="text-sm md:text-[14px] text-gray-500">{props.date}</p>
+            <p className="text-sm md:text-[14px] text-gray-500">{formatDate(props.date)}</p>
           </div>
         </div>
       </div>

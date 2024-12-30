@@ -3,6 +3,24 @@ import {
   NewsOne
 } from "../assets/images/index";
 
+export const productFeatureTitle = {
+  color: "Цвет",
+  dryingTime: "Время высыхания",
+  waterproof: "Водостойкость",
+  mixingRatio: "Соотношение смешивания",
+  maxGrainSize: "Максимальный размер зерна",
+  materialClass: "Максимальная крупность наполнителя",
+  mobilityClass: "Класс мобильности",
+  strengthClass: "Класс прочности",
+  frostResistance: "Морозостойкость",
+  adhesionStrength: "Прочность сцепления",
+  effectiveActivity: "Удельная эффективная активность ЕРН (Аэфф)",
+  compressiveStrength: "Прочность на сжатие",
+  materialConsumption: "Расход материала",
+  applicationTemperature: "Температура применения",
+  solutionViability: "Жизнеспособность раствора",
+}
+
 export const navBarList = [
   {
     _id: 1001,

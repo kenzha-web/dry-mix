@@ -1,6 +1,7 @@
 import {memo, useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
+import EquipmentSlider from "../../components/EquipmentSlider/EquipmentSlider";
 
 const About = () => {
   const location = useLocation();
@@ -11,7 +12,7 @@ const About = () => {
   return (
     <div className="max-w-container mx-auto px-4">
       <Breadcrumbs title="О компании" prevLocation={prevLocation} />
-      <div className="pb-10">
+      <div>
         <h1 className="text-base text-lightText mb-2 text-justify">
           <span className="text-primeColor font-semibold text-lg">Производство строительных материалов из техногенных отходов.</span>{" "}
           Современное производство строительных материалов стремится не только к повышению качества продукции, но и к минимизации воздействия на окружающую среду. Одним из перспективных направлений является использование техногенных отходов в качестве сырья для производства. Это позволяет сократить объем отходов, сохранить природные ресурсы и развивать циркулярную экономику.<br />
@@ -43,13 +44,8 @@ const About = () => {
           Производство строительных материалов из фторгипса способствует улучшению экологической обстановки в регионе, созданию новых рабочих мест и стимулирует развитие промышленности. Внедрение безотходных технологий также укрепляет позиции местного предприятия на рынке и вносит вклад в устойчивое развитие строительной отрасли Восточного Казахстана.<br/>
           Запуск мини-цеха открывает возможности для дальнейшего развития инновационного производства, повышая привлекательность региона для инвестиций и улучшая качество жизни местного населения.
         </h1>
-        <Link to="/catalog">
-          <button className="w-52 h-10 bg-greenPrimeColor text-white hover:bg-black duration-300">
-            Поспотреть каталог
-          </button>
-        </Link>
       </div>
-
+      <EquipmentSlider />
     </div>
   );
 };

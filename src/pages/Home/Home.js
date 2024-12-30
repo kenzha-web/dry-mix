@@ -1,9 +1,9 @@
 import Banner from "../../components/Banner/Banner";
 import FeaturedBuildingMixes from "../../components/home/FeaturedBuildingMixes/FeaturedBuildingMixes";
-import FeaturedBuildingMaterials from "../../components/home/FeaturedBuildingMaterials/FeaturedBuildingMaterials";
 import AboutCompany from "../../components/home/AboutCompany/AboutCompany";
-import CompanyContacts from "../../components/home/CompanyContacts/CompanyContacts";
+import ContactComponent from "../../components/home/ContactCompany/ContactComponent";
 import {memo} from "react";
+import Heading from "../../components/home/Products/Heading";
 
 const Home = () => {
   return (
@@ -11,9 +11,10 @@ const Home = () => {
       <div className="max-w-container mx-auto px-4">
         <Banner />
         <FeaturedBuildingMixes />
-        <FeaturedBuildingMaterials />
+        {/*<FeaturedBuildingMaterials />*/}
         <AboutCompany />
-        <CompanyContacts />
+        <Heading heading="Контакты" />
+        <ContactComponent />
       </div>
     </div>
   );

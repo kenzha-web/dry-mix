@@ -5,13 +5,12 @@ import {memo} from "react";
 const Footer = () => {
   return (
     <div className="w-full bg-headerColor py-20">
-      <div className="max-w-container mx-auto grid grid-cols-1 md:grid-cols-2  xl:grid-cols-6 px-4 gap-10">
+      <div className="max-w-container mx-auto grid grid-cols-2 md:grid-cols-2  xl:grid-cols-6 px-4 gap-10">
         <div className="col-span-2">
           <FooterListTitle title=" Подробнее о производстве" />
           <div className="flex flex-col gap-6">
             <p className="text-base text-white w-full xl:w-[80%]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sint
-              ab ullam, numquam nesciunt in.
+              Ознакомьтесь с нашим процессом производства и узнайте, почему наши строительные смеси отвечают самым высоким стандартам качества.
             </p>
             <ul className="flex items-center gap-2">
               <a
@@ -57,19 +56,19 @@ const Footer = () => {
           <FooterListTitle title="Каталог" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Штукатурки
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Шпатлевки
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Плиточные клеи
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Затирки для швов
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Наливной пол
             </li>
           </ul>
         </div>
@@ -77,19 +76,7 @@ const Footer = () => {
           <FooterListTitle title="Производство" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Контроль качества при производстве
             </li>
           </ul>
         </div>
@@ -97,19 +84,10 @@ const Footer = () => {
           <FooterListTitle title="Информация" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Новости
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Уникальные свойства
             </li>
           </ul>
         </div>
@@ -117,19 +95,13 @@ const Footer = () => {
           <FooterListTitle title="Наши контакты" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              +7 (XXX) XXX XX XX
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              Серикбаева 19
             </li>
             <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
-            </li>
-            <li className="font-titleFont text-base text-white hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Lorem
+              example@gmail.com
             </li>
           </ul>
         </div>

@@ -15,6 +15,8 @@ import categoriesSlice from "./features/categories/categoriesSlice";
 import productsSlice from "./features/products/productsSlice";
 import {apiSlice} from "./features/api/apiSlice";
 import authSlice from "./features/auth/authSlice";
+import postsSlice from "./features/posts/postsSlice";
+import commentsSlice from "./features/comments/commentsSlice";
 
 const persistConfig = {
   key: "root",
@@ -30,6 +32,8 @@ export const store = configureStore({
     auth: authSlice,
     categories: categoriesSlice,
     products: productsSlice,
+    posts: postsSlice,
+    comments: commentsSlice,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>

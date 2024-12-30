@@ -1,25 +1,33 @@
-import {memo, useState} from "react";
+import { memo, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  AlinexOne,
-  AlinexTwo,
-  AlinexThree,
-  AlinexFour,
-} from "../../../assets/images/index";
 import SampleNextArrow from "./../../designLayouts/buttons/SampleNextArrow";
 import SamplePrevArrow from "./../../designLayouts/buttons/SamplePrevArrow";
-
+import { getProducts } from "../../../store/features/products/productsSlice";
 const FeaturedBuildingMixes = () => {
-  const [activeTab, setActiveTab] = useState("");
-
+  const dispatch = useDispatch();
+  const { list: products, isLoading } = useSelector((state) => state.products);
+  const [activeTab, setActiveTab] = useState("Акция");
   const tabs = ["Новинка", "Акция", "Рекомендуем", "Хит"];
+
+  useEffect(() => {
+    dispatch(getProducts({ page: 1, limit: 12 }));
+  }, [dispatch]);
+
+  const filteredProducts = Array.isArray(products)
+    ? products.filter(
+      (item) =>
+        item &&
+        item.status?.toLowerCase() === activeTab.toLowerCase()
+    )
+    : [];
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: Math.min(4, filteredProducts.length), // Показать не больше, чем есть продуктов
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -27,25 +35,19 @@ const FeaturedBuildingMixes = () => {
       {
         breakpoint: 1025,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
+          slidesToShow: Math.min(3, filteredProducts.length),
         },
       },
       {
         breakpoint: 769,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
+          slidesToShow: Math.min(2, filteredProducts.length),
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
+          slidesToShow: Math.min(1, filteredProducts.length),
         },
       },
     ],
@@ -80,65 +82,49 @@ const FeaturedBuildingMixes = () => {
           ))}
         </div>
       </div>
-      <Slider {...settings} className="px-2 md:px-4">
-        <div className="px-1 md:px-2">
-          <Product
-            _id="100001"
-            img={AlinexOne}
-            productName="Гипсовая штукатурка, 30кг"
-            price="999"
-            color="Штукатурки"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
+
+      {isLoading ? (
+        <p className="text-center">Загрузка...</p>
+      ) : filteredProducts.length > 0 ? (
+        filteredProducts.length > 1 ? (
+          <Slider {...settings} className="px-2 md:px-4">
+            {filteredProducts.map((item, index) => (
+              <div className="px-1 md:px-2" key={item.id || index}>
+                <Product
+                  id={item.id || ""}
+                  imageUrl={item.imageUrl}
+                  name={item.name || "Без названия"}
+                  price={item.price || 0}
+                  category={item.category?.name || "—"}
+                  status={item.status || ""}
+                  description={item.description || "Нет описания"}
+                />
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <div className="px-2 md:px-4">
+            <Product
+              id={filteredProducts[0].id || ""}
+              imageUrl={filteredProducts[0].imageUrl}
+              name={filteredProducts[0].name || "Без названия"}
+              price={filteredProducts[0].price || 0}
+              category={filteredProducts[0].category?.name || "—"}
+              status={filteredProducts[0].status || ""}
+              description={filteredProducts[0].description || "Нет описания"}
+            />
+          </div>
+        )
+      ) : (
+        <div className="text-center text-red-500 mt-4">
+          Нет продуктов в категории "{activeTab}"
         </div>
-        <div className="px-1 md:px-2">
-          <Product
-            _id="100002"
-            img={AlinexTwo}
-            productName="Гипсовая универсальная шпатлевка, 25 кг"
-            price="999"
-            color="Шпатлевки"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
-        </div>
-        <div className="px-1 md:px-2">
-          <Product
-            _id="100003"
-            img={AlinexThree}
-            productName="Плиточный цементный клей для керамической плитки, 25 кг"
-            price="999"
-            color="Плиточные клеи"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
-        </div>
-        <div className="px-1 md:px-2">
-          <Product
-            _id="100004"
-            img={AlinexFour}
-            productName="Плиточный цементный клей, 25 кг"
-            price="999"
-            color="Плиточные клеи"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
-        </div>
-        <div className="px-1 md:px-2">
-          <Product
-            _id="100005"
-            img={AlinexFour}
-            productName="Плиточный цементный клей, 25 кг"
-            price="999"
-            color="Плиточные клеи"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
-        </div>
-      </Slider>
+      )}
     </div>
   );
 };
 
 export default memo(FeaturedBuildingMixes);
+
+
+
