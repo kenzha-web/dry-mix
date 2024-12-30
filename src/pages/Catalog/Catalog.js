@@ -11,7 +11,8 @@ const Catalog = () => {
   const dispatch = useDispatch();
   const { list: categories, isLoading: isCategoriesLoading } = useSelector((state) => state.categories);
   const [itemsPerPage, setItemsPerPage] = useState(12);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Выбранная категория
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false); // Управление состоянием мобильной панели
 
   const itemsPerPageFromBanner = (itemsPerPage) => {
     setItemsPerPage(itemsPerPage);
@@ -29,16 +30,34 @@ const Catalog = () => {
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategory(categoryId);
+    setIsMobileNavOpen(false);
   };
 
   return (
     <div className="max-w-container mx-auto px-4">
       <Breadcrumbs title="Каталог" />
-      <div className="w-full h-full flex pb-20 gap-10">
-        <div className="w-[20%] lgl:w-[25%] hidden mdl:inline-flex h-full">
+      <div className="w-full h-full flex flex-col gap-6 pb-20 mdl:flex-row mdl:gap-10">
+        <button
+          className="mdl:hidden mb-4 bg-greenPrimeColor text-white py-2 px-4 rounded"
+          onClick={() => setIsMobileNavOpen(true)}
+        >
+          Открыть категории
+        </button>
+        {isMobileNavOpen && (
+          <div className="fixed inset-0 bg-white z-50 p-4 overflow-auto">
+            <button
+              className="absolute top-4 right-4 text-xl"
+              onClick={() => setIsMobileNavOpen(false)}
+            >
+              ✖
+            </button>
+            <ShopSideNav onSelectCategory={handleCategorySelect} />
+          </div>
+        )}
+        <div className="hidden mdl:inline-flex w-full mdl:w-[25%] h-full">
           <ShopSideNav onSelectCategory={handleCategorySelect} />
         </div>
-        <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
+        <div className="w-full mdl:w-[75%] h-full flex flex-col gap-10">
           <ProductBanner itemsPerPageFromBanner={itemsPerPageFromBanner} />
           {!isCategoriesLoading && (
             <Pagination itemsPerPage={itemsPerPage} selectedCategory={selectedCategory} />
